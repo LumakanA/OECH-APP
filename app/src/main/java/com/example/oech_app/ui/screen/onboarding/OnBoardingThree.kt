@@ -99,7 +99,7 @@ fun OnboardingThree(
                         style = defaultTextStyle.textStyle3.copy(color = DarkGrayColor)
                     )
                     BasicText(
-                        modifier = Modifier.clickable {  },
+                        modifier = Modifier.clickable { },
                         text = "Sign in",
                         style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
                     )

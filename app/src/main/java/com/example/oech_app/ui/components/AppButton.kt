@@ -14,6 +14,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.oech_app.ui.theme.PrimaryColor
+import com.example.oech_app.ui.theme.TextBlackColor
 import com.example.oech_app.ui.theme.White
 import com.example.oech_app.ui.theme.defaultTextStyle
 
@@ -40,7 +41,11 @@ fun AppButton(
         BasicText(
             modifier = modifierText.padding(horizontal = 8.dp, vertical = 4.dp),
             text = text,
-            style = textStyle
+            style = if (backgroundColor == PrimaryColor) {
+                textStyle.copy(color = White)
+            } else {
+                textStyle.copy(color = TextBlackColor)
+            }
         )
     }
 }
