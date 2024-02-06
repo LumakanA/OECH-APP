@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">OECH-APP</string>
+    <string name="quick_delivery_at_your_doorstep">Quick Delivery At Your\nDoorstep</string>
+    <string name="enjoy_quick_pick_up_and_delivery_to_your_destination">Enjoy quick pick-up and delivery to\nyour destination</string>
+    <string name="flexible_payment">Flexible Payment</string>
+    <string name="different_modes_of_payment_either_before_and_after_delivery_without_stress">Different modes of payment either\nbefore and after delivery without\nstress</string>
+    <string name="real_time_tracking">Real-time Tracking</string>
+    <string name="track_your_packages_items_from_the_comfort_of_your_home_till_final_destination">Track your packages/items from the\ncomfort of your home till final destination</string>
+</resources>
