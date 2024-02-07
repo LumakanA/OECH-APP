@@ -30,6 +30,7 @@ import com.example.oech_app.ui.components.AppButton
 import com.example.oech_app.ui.theme.PrimaryColor
 import com.example.oech_app.ui.theme.White
 import com.example.oech_app.ui.theme.defaultTextStyle
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun OnboardingOne(
@@ -87,12 +88,17 @@ fun OnboardingOne(
                         text = "Skip",
                         backgroundColor = White,
                         contentColor = PrimaryColor,
-                        onClick = {},
+                        onClick = {
+                            vm.setStartupTrue()
+                            navController.navigate("holder")
+                        },
                         textStyle = defaultTextStyle.textButton1
                     )
                     AppButton(
                         text = "Next",
-                        onClick = {},
+                        onClick = {
+                            navController.navigate("onBoardingTwo")
+                        },
                         textStyle = defaultTextStyle.textButton1
                     )
                 }
@@ -105,7 +111,7 @@ fun OnboardingOne(
 @Composable
 private fun OnboardingOnePreview() {
     OnboardingOne(
-        vm = OnboardingViewModel(),
+        vm = koinViewModel(),
         navController = rememberNavController()
     )
 }

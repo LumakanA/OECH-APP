@@ -32,6 +32,7 @@ import com.example.oech_app.ui.theme.DarkGrayColor
 import com.example.oech_app.ui.theme.PrimaryColor
 import com.example.oech_app.ui.theme.White
 import com.example.oech_app.ui.theme.defaultTextStyle
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun OnboardingThree(
@@ -85,6 +86,10 @@ fun OnboardingThree(
                         .fillMaxSize()
                         .padding(top = 96.dp),
                     text = "Sign Up",
+                    onClick = {
+                        vm.setStartupTrue()
+                        navController.navigate("holder")
+                    },
                     textStyle = defaultTextStyle.textButton2.copy(color = White)
                 )
                 Row(
@@ -113,7 +118,7 @@ fun OnboardingThree(
 @Composable
 private fun OnboardingThreePreview() {
     OnboardingThree(
-        vm = OnboardingViewModel(),
+        vm = koinViewModel(),
         navController = rememberNavController()
     )
 }
