@@ -3,27 +3,27 @@ package com.example.oech_app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.example.oech_app.ui.screen.onboarding.OnboardingOne
-import com.example.oech_app.ui.screen.onboarding.OnboardingThree
-import com.example.oech_app.ui.screen.onboarding.OnboardingViewModel
+import com.example.oech_app.data.Storage
+import com.example.oech_app.ui.navigation.NavGraph
+import com.example.oech_app.ui.navigation.ScreensRouts
 import com.example.oech_app.ui.theme.OECHAPPTheme
+import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
+    private val storage: Storage by inject()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navController = rememberNavController()
             OECHAPPTheme {
-                OnboardingThree(
-                    vm = OnboardingViewModel(),
-                    navController = rememberNavController()
+                NavGraph(
+                    navHostController = navController,
+                    startScreen = if (storage.isStartup != null) {
+                        ScreensRouts.Holder.route
+                    } else {
+                        ScreensRouts.OnBoarding.route
+                    }
                 )
             }
         }

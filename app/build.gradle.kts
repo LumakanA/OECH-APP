@@ -51,6 +51,10 @@ android {
 
 dependencies {
 
+    implementation("io.insert-koin:koin-core:3.4.3")
+    implementation("io.insert-koin:koin-android:3.4.3")
+    implementation("io.insert-koin:koin-androidx-compose:3.4.6")
+
     implementation("androidx.navigation:navigation-compose:2.7.6")
     implementation("androidx.core:core-splashscreen:1.0.1")
 
