@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
                 NavGraph(
                     navHostController = navController,
                     startScreen = if (storage.isStartup != null) {
-                        ScreensRouts.Holder.route
+                        ScreensRouts.SignInScreen.route
                     } else {
                         ScreensRouts.OnBoarding.route
                     }

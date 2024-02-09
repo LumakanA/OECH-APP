@@ -6,4 +6,9 @@
     <string name="different_modes_of_payment_either_before_and_after_delivery_without_stress">Different modes of payment either\nbefore and after delivery without\nstress</string>
     <string name="real_time_tracking">Real-time Tracking</string>
     <string name="track_your_packages_items_from_the_comfort_of_your_home_till_final_destination">Track your packages/items from the\ncomfort of your home till final destination</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_in">Sign in</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
 </resources>

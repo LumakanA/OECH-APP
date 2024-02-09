@@ -33,6 +33,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.oech_app.R
 import com.example.oech_app.domain.onboarding.OnboardItem
 import com.example.oech_app.ui.components.AppButton
+import com.example.oech_app.ui.navigation.ScreensRouts
 import com.example.oech_app.ui.theme.DarkGrayColor
 import com.example.oech_app.ui.theme.PrimaryColor
 import com.example.oech_app.ui.theme.White
@@ -115,10 +116,10 @@ fun OnboardingScreen(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(top = 96.dp),
-                            text = "Sign Up",
+                            text = stringResource(R.string.sign_up),
                             onClick = {
                                 vm.setStartupTrue()
-                                navController.navigate("holder")
+                                navController.navigate(ScreensRouts.SignInScreen.route)
                             },
                             textStyle = defaultTextStyle.textButton2.copy(color = White)
                         )
@@ -130,12 +131,12 @@ fun OnboardingScreen(
                         ) {
                             BasicText(
                                 modifier = Modifier.padding(end = 1.dp),
-                                text = "Already have an account?",
+                                text = stringResource(R.string.already_have_an_account),
                                 style = defaultTextStyle.textStyle3.copy(color = DarkGrayColor)
                             )
                             BasicText(
                                 modifier = Modifier.clickable { },
-                                text = "Sign in",
+                                text = stringResource(R.string.sign_in),
                                 style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
                             )
                         }
@@ -147,20 +148,20 @@ fun OnboardingScreen(
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             AppButton(
-                                text = "Skip",
+                                text = stringResource(R.string.skip),
                                 backgroundColor = White,
                                 contentColor = PrimaryColor,
                                 onClick = {
                                     vm.setStartupTrue()
-                                    navController.navigate("holder")
+                                    navController.navigate(ScreensRouts.SignInScreen.route)
                                 },
                                 textStyle = defaultTextStyle.textButton1
                             )
                             AppButton(
-                                text = "Next",
+                                text = stringResource(R.string.next),
                                 onClick = {
                                     if (pagerState.currentPage == onboardItems.size - 1) {
-                                        navController.navigate("holder")
+                                        navController.navigate(ScreensRouts.SignInScreen.route)
                                     } else {
                                         coroutineScope.launch {
                                             pagerState.animateScrollToPage(pagerState.currentPage + 1)

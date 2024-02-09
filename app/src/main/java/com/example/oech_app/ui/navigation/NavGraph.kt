@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.oech_app.ui.screen.holder.Holder
 import com.example.oech_app.ui.screen.onboarding.OnboardingScreen
+import com.example.oech_app.ui.screen.signup.SignUpScreen
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -20,8 +20,11 @@ fun NavGraph(
                 navController = navHostController
             )
         }
-        composable(ScreensRouts.Holder.route) {
-            Holder()
+        composable(ScreensRouts.SignInScreen.route) {
+            SignUpScreen(
+                vm = koinViewModel(),
+                navController = navHostController
+            )
         }
     }
 }
