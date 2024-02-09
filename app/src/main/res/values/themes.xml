@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.OECHAPP.Starting" parent="Theme.SplashScreen"  >
+    <style name="Theme.OECHAPP.Starting" parent="Theme.AppCompat.NoActionBar"  >
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_screen</item>
         <item name="windowSplashScreenBackground">@color/white</item>
     </style>
