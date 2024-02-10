@@ -9,21 +9,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.oech_app.ui.components.AppButton
+import com.example.oech_app.ui.components.AppTextField
 import com.example.oech_app.ui.theme.DarkGrayColor
-import com.example.oech_app.ui.theme.LightGrayColor
 import com.example.oech_app.ui.theme.TextGrayColor
 import com.example.oech_app.ui.theme.defaultTextStyle
 
@@ -33,9 +29,9 @@ private val DefaultTopTextPadding = 8.dp
 @Composable
 fun SignUpScreen(
     vm: SignUpViewModel,
-    navController: NavController
+    navController: NavController,
+    state: SignUpState
 ) {
-    var text by remember { mutableStateOf("") }
 
     Scaffold { containerPadding ->
         Box(
@@ -65,17 +61,82 @@ fun SignUpScreen(
                     text = "Full name",
                     style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
                 )
-
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = text,
-                    onValueChange = { text = it },
-                    label = {
-                        BasicText(
-                            text = "",
-                            style = defaultTextStyle.textStyle3Bigger.copy(color = LightGrayColor)
-                        )
-                    }
+                AppTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = DefaultTopTextPadding),
+                    value = state.fullName,
+                    onValueChange = {
+                        SignUpViewAction.UpdateName(it)
+                    },
+                    hintText = "Ivanov Ivan"
+                )
+                BasicText(
+                    modifier = Modifier.padding(top = 33.dp),
+                    text = "Phone Number",
+                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                )
+                AppTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = DefaultTopTextPadding),
+                    value = state.phoneNumber,
+                    onValueChange = {
+                        SignUpViewAction.UpdatePhone(it)
+                    },
+                    hintText = "+7(999)999-99-99"
+                )
+                BasicText(
+                    modifier = Modifier.padding(top = 33.dp),
+                    text = "Email Address",
+                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                )
+                AppTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = DefaultTopTextPadding),
+                    value = state.email,
+                    onValueChange = {
+                        SignUpViewAction.UpdateEmail(it)
+                    },
+                    hintText = "***********@mail.com"
+                )
+                BasicText(
+                    modifier = Modifier.padding(top = 33.dp),
+                    text = "Password",
+                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                )
+                AppTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = DefaultTopTextPadding),
+                    value = state.password,
+                    onValueChange = {
+                        SignUpViewAction.UpdatePassword(it)
+                    },
+                    hintText = "**********"
+                )
+                BasicText(
+                    modifier = Modifier.padding(top = 33.dp),
+                    text = "Confirm Password",
+                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                )
+                AppTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = DefaultTopTextPadding),
+                    value = state.confirmPassword,
+                    onValueChange = {
+                        SignUpViewAction.UpdateConfirmPassword(it)
+                    },
+                    hintText = "**********"
+                )
+                AppButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 129.dp),
+                    text = "Sign Up",
+                    textStyle = defaultTextStyle.textButton2
                 )
             }
         }
@@ -88,6 +149,7 @@ fun SignUpScreen(
 private fun SignUpScreenPreview() {
     SignUpScreen(
         vm = SignUpViewModel(),
-        navController = rememberNavController()
+        navController = rememberNavController(),
+        state = SignUpState()
     )
 }
