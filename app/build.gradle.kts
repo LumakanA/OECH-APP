@@ -80,7 +80,6 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    // Mock
     testImplementation("org.mockito:mockito-core:5.10.0")
     androidTestImplementation("org.mockito:mockito-android:5.10.0")
     androidTestImplementation("androidx.navigation:navigation-testing:2.7.6")
