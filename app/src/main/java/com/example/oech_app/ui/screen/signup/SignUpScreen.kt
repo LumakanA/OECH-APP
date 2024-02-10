@@ -29,10 +29,9 @@ private val DefaultTopTextPadding = 8.dp
 @Composable
 fun SignUpScreen(
     vm: SignUpViewModel,
-    navController: NavController,
-    state: SignUpState
+    navController: NavController
 ) {
-
+    val state = vm.state.value
     Scaffold { containerPadding ->
         Box(
             modifier = Modifier
@@ -66,8 +65,8 @@ fun SignUpScreen(
                         .fillMaxWidth()
                         .padding(top = DefaultTopTextPadding),
                     value = state.fullName,
-                    onValueChange = {
-                        SignUpViewAction.UpdateName(it)
+                    onValueChange = {newName ->
+                        vm.updateName(newName)
                     },
                     hintText = "Ivanov Ivan"
                 )
@@ -81,8 +80,8 @@ fun SignUpScreen(
                         .fillMaxWidth()
                         .padding(top = DefaultTopTextPadding),
                     value = state.phoneNumber,
-                    onValueChange = {
-                        SignUpViewAction.UpdatePhone(it)
+                    onValueChange = {newPhone ->
+                        vm.updatePhone(newPhone)
                     },
                     hintText = "+7(999)999-99-99"
                 )
@@ -96,8 +95,8 @@ fun SignUpScreen(
                         .fillMaxWidth()
                         .padding(top = DefaultTopTextPadding),
                     value = state.email,
-                    onValueChange = {
-                        SignUpViewAction.UpdateEmail(it)
+                    onValueChange = {newEmail ->
+                        vm.updateEmail(newEmail)
                     },
                     hintText = "***********@mail.com"
                 )
@@ -111,8 +110,8 @@ fun SignUpScreen(
                         .fillMaxWidth()
                         .padding(top = DefaultTopTextPadding),
                     value = state.password,
-                    onValueChange = {
-                        SignUpViewAction.UpdatePassword(it)
+                    onValueChange = {newPassword ->
+                        vm.updatePassword(newPassword)
                     },
                     hintText = "**********"
                 )
@@ -126,8 +125,8 @@ fun SignUpScreen(
                         .fillMaxWidth()
                         .padding(top = DefaultTopTextPadding),
                     value = state.confirmPassword,
-                    onValueChange = {
-                        SignUpViewAction.UpdateConfirmPassword(it)
+                    onValueChange = {newConfirmPassword ->
+                        vm.updateConfirmPassword(newConfirmPassword)
                     },
                     hintText = "**********"
                 )
@@ -149,7 +148,6 @@ fun SignUpScreen(
 private fun SignUpScreenPreview() {
     SignUpScreen(
         vm = SignUpViewModel(),
-        navController = rememberNavController(),
-        state = SignUpState()
+        navController = rememberNavController()
     )
 }
