@@ -11,4 +11,5 @@
     <string name="sign_in">Sign in</string>
     <string name="skip">Skip</string>
     <string name="next">Next</string>
+    <string name="or_sign_in_using">or sign in using</string>
 </resources>

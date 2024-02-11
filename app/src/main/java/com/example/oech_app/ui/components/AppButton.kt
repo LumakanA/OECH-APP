@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.oech_app.ui.theme.DarkGrayColor
 import com.example.oech_app.ui.theme.PrimaryColor
 import com.example.oech_app.ui.theme.TextBlackColor
 import com.example.oech_app.ui.theme.White
@@ -26,17 +27,23 @@ fun AppButton(
     contentColor: Color = White,
     text: String,
     textStyle: TextStyle,
+    buttonEnabled: Boolean = true,
     onClick: () -> Unit = {}
 ) {
     Button(
         modifier = modifier,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = backgroundColor,
+        colors = if (buttonEnabled) {
+            ButtonDefaults.buttonColors(
+                containerColor = backgroundColor,
+                contentColor = contentColor
+            )
+        } else ButtonDefaults.buttonColors(
+            containerColor = DarkGrayColor,
             contentColor = contentColor
         ),
         onClick = onClick,
         shape = RoundedCornerShape(CornerSize(4.69.dp)),
-        border = BorderStroke(1.dp, PrimaryColor)
+        border = BorderStroke(1.dp, if (buttonEnabled) PrimaryColor else DarkGrayColor)
     ) {
         BasicText(
             modifier = modifierText.padding(horizontal = 8.dp, vertical = 4.dp),
@@ -68,5 +75,15 @@ private fun AppButtonPreview2() {
         backgroundColor = White,
         contentColor = PrimaryColor,
         textStyle = defaultTextStyle.textButton1
+    )
+}
+
+@Preview
+@Composable
+private fun AppButtonPreview3() {
+    AppButton(
+        text = "sadasdasd",
+        textStyle = defaultTextStyle.textButton1,
+        buttonEnabled = false
     )
 }

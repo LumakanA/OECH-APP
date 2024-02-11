@@ -45,7 +45,6 @@ fun AppTextField(
     val textHintColor by remember { mutableStateOf(getTextHintColor(isError)) }
 
     var isTextVisible by remember { mutableStateOf(!isPassword) }
-
     BasicTextField(
         value = value,
         onValueChange = onValueChange,

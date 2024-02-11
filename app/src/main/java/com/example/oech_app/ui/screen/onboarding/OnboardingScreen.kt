@@ -48,10 +48,8 @@ fun OnboardingScreen(
     state: OnboardingState
 ) {
 
-    // Устанавливаем данные в OnboardingViewModel
     vm.setOnboardItems(state.onboardItems)
 
-    // Получаем данные из OnboardingViewModel
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState {
         vm.getOnboardItems().size
