@@ -15,9 +15,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -79,7 +79,7 @@ fun OnboardingScreen(
                         painter = painterResource(id = state.onboardItems[page].imageResId),
                         contentDescription = ""
                     )
-                    BasicText(
+                    Text(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 48.dp)
@@ -90,7 +90,7 @@ fun OnboardingScreen(
                             color = PrimaryColor
                         )
                     )
-                    BasicText(
+                    Text(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 5.dp),
@@ -115,12 +115,12 @@ fun OnboardingScreen(
                                 .padding(top = 20.dp),
                             horizontalArrangement = Arrangement.Center
                         ) {
-                            BasicText(
+                            Text(
                                 modifier = Modifier.padding(end = 1.dp),
                                 text = stringResource(R.string.already_have_an_account),
                                 style = defaultTextStyle.textStyle3.copy(color = DarkGrayColor)
                             )
-                            BasicText(
+                            Text(
                                 modifier = Modifier.clickable { },
                                 text = stringResource(R.string.sign_in),
                                 style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),

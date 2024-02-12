@@ -10,7 +10,6 @@ class Storage(context: Context) {
         SharedPreferenceName,
         Context.MODE_PRIVATE
     )
-
     private fun getString(key: String): String? {
         return prefs.getString(key, null)
     }

@@ -1,6 +1,7 @@
 package com.example.oech_app.di
 
 import com.example.oech_app.data.Storage
+import com.example.oech_app.ui.screen.login.LogInViewModel
 import com.example.oech_app.ui.screen.onboarding.OnboardingViewModel
 import com.example.oech_app.ui.screen.signup.SignUpViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -15,5 +16,8 @@ val appModule = module {
     }
     viewModel {
         SignUpViewModel()
+    }
+    viewModel {
+        LogInViewModel()
     }
 }

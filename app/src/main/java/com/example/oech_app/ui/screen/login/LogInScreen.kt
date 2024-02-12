@@ -1,4 +1,4 @@
-package com.example.oech_app.ui.screen.signup
+package com.example.oech_app.ui.screen.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -23,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -42,8 +42,8 @@ private val DefaultTopPadding = 24.dp
 private val DefaultTopTextPadding = 8.dp
 
 @Composable
-fun SignUpScreen(
-    vm: SignUpViewModel,
+fun LogInScreen(
+    vm: LogInViewModel,
     navController: NavController
 ) {
     val state = vm.state
@@ -61,47 +61,17 @@ fun SignUpScreen(
                     .verticalScroll(rememberScrollState())
             ) {
                 Text(
-                    modifier = Modifier.padding(top = 33.dp),
-                    text = stringResource(R.string.create_an_account),
+                    modifier = Modifier.padding(top = 110.dp),
+                    text = stringResource(R.string.welcome_back),
                     style = defaultTextStyle.textStyle4.copy(color = TextGrayColor)
                 )
                 Text(
                     modifier = Modifier.padding(top = DefaultTopTextPadding),
-                    text = stringResource(R.string.complete_the_sign_up_process_to_get_started),
+                    text = stringResource(R.string.fill_in_your_email_and_password_to_continue),
                     style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
                 )
                 Text(
-                    modifier = Modifier.padding(top = 33.dp),
-                    text = stringResource(R.string.full_name),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
-                )
-                AppTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = DefaultTopTextPadding),
-                    value = state.fullName,
-                    onValueChange = { newName ->
-                        vm.updateName(newName)
-                    },
-                    hintText = stringResource(R.string.ivanov_ivan)
-                )
-                Text(
-                    modifier = Modifier.padding(top = 33.dp),
-                    text = stringResource(R.string.phone_number),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
-                )
-                AppTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = DefaultTopTextPadding),
-                    value = state.phoneNumber,
-                    onValueChange = { newPhone ->
-                        vm.updatePhone(newPhone)
-                    },
-                    hintText = stringResource(R.string._7_999_999_99_99)
-                )
-                Text(
-                    modifier = Modifier.padding(top = 33.dp),
+                    modifier = Modifier.padding(top = 20.dp),
                     text = stringResource(R.string.email_address),
                     style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
                 )
@@ -116,7 +86,7 @@ fun SignUpScreen(
                     hintText = stringResource(R.string.mail_com)
                 )
                 Text(
-                    modifier = Modifier.padding(top = 33.dp),
+                    modifier = Modifier.padding(top = 24.dp),
                     text = stringResource(R.string.password),
                     style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
                 )
@@ -131,50 +101,39 @@ fun SignUpScreen(
                     isPassword = true,
                     hintText = stringResource(R.string.hint_password)
                 )
-                Text(
-                    modifier = Modifier.padding(top = 33.dp),
-                    text = stringResource(R.string.confirm_password),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
-                )
-                AppTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = DefaultTopTextPadding),
-                    value = state.confirmPassword,
-                    onValueChange = { newConfirmPassword ->
-                        vm.updateConfirmPassword(newConfirmPassword)
-                    },
-                    isPassword = true,
-                    hintText = stringResource(R.string.hint_password)
-                )
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 37.dp),
+                        .padding(top = 17.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Checkbox(
                         modifier = Modifier.size(14.dp),
-                        checked = state.policyAgree,
+                        checked = state.rememberAgree,
                         onCheckedChange = { vm.setAgree(it) }
                     )
                     Text(
-                        modifier = Modifier
-                            .padding(start = 20.dp),
-                        text = stringResource(R.string.by_ticking_this_box_you_agree_to_our_terms_and_conditions_and_private_policy),
-                        style = defaultTextStyle.textStyleMini.copy(color = DarkGrayColor),
-                        textAlign = TextAlign.Center
+                        modifier = Modifier.padding(start = 10.dp),
+                        text = stringResource(R.string.remember_password),
+                        style = defaultTextStyle.bodyMedium12.copy(color = DarkGrayColor)
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+                    Text(
+                        modifier = Modifier.padding(start = 10.dp),
+                        text = stringResource(R.string.forgot_password_question),
+                        style = defaultTextStyle.bodyMedium12.copy(color = PrimaryColor)
                     )
                 }
                 AppButton(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 64.dp),
-                    text = stringResource(id = R.string.sign_up),
+                        .padding(top = 187.dp),
+                    text = stringResource(R.string.sign_up),
                     textStyle = defaultTextStyle.textButton2,
                     buttonEnabled = state.buttonEnabled,
                     onClick = {
-                        if (state.buttonEnabled) navController.navigate(ScreensRouts.LogInScreen.route)
+                        if (state.buttonEnabled) navController.navigate(ScreensRouts.Holder.route)
+                        if (state.rememberAgree) vm.savePassword(state.password)
                     }
                 )
                 Row(
@@ -184,13 +143,13 @@ fun SignUpScreen(
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        modifier = Modifier.padding(end = 3.dp),
+                        modifier = Modifier.padding(end = 1.dp),
                         text = stringResource(R.string.already_have_an_account),
                         style = defaultTextStyle.textStyle3.copy(color = DarkGrayColor)
                     )
                     Text(
-                        modifier = Modifier.clickable { navController.navigate(ScreensRouts.LogInScreen.route) },
-                        text = stringResource(R.string.sign_in),
+                        modifier = Modifier.clickable { },
+                        text = stringResource(R.string.sign_up),
                         style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
                     )
                 }
@@ -226,9 +185,9 @@ fun GoogleAuth(
 
 @Preview
 @Composable
-private fun SignUpScreenPreview() {
-    SignUpScreen(
-        vm = SignUpViewModel(),
+private fun LogInScreenPreview() {
+    LogInScreen(
+        vm = LogInViewModel(),
         navController = rememberNavController()
     )
 }

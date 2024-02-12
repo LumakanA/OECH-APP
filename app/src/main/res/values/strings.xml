@@ -12,4 +12,24 @@
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="or_sign_in_using">or sign in using</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="complete_the_sign_up_process_to_get_started">Complete the sign up process to get started</string>
+    <string name="full_name">Full name</string>
+    <string name="ivanov_ivan">Ivanov Ivan</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="_7_999_999_99_99">+7(999)999–99-99</string>
+    <string name="mail_com">***********@mail.com</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="hint_password">**********</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="by_ticking_this_box_you_agree_to_our_terms_and_conditions_and_private_policy">By ticking this box, you agree to our Terms and\nconditions and private policy</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="fill_in_your_email_and_password_to_continue">Fill in your email and password to continue</string>
+    <string name="remember_password">Remember password</string>
+    <string name="forgot_password_question">Forgot Password?</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="remember_password_back_to">Remember password? Back to</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="enter_your_email_address">Enter your email address</string>
 </resources>
