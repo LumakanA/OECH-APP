@@ -105,7 +105,7 @@ fun OnboardingScreen(
                             text = stringResource(R.string.sign_up),
                             onClick = {
                                 vm.setStartupTrue()
-                                navController.navigate(ScreensRouts.SignInScreen.route)
+                                navController.navigate(ScreensRouts.SignUpScreen.route)
                             },
                             textStyle = defaultTextStyle.textButton2.copy(color = White)
                         )
@@ -139,7 +139,7 @@ fun OnboardingScreen(
                                 contentColor = PrimaryColor,
                                 onClick = {
                                     vm.setStartupTrue()
-                                    navController.navigate(ScreensRouts.SignInScreen.route)
+                                    navController.navigate(ScreensRouts.SignUpScreen.route)
                                 },
                                 textStyle = defaultTextStyle.textButton1
                             )
@@ -147,7 +147,7 @@ fun OnboardingScreen(
                                 text = stringResource(R.string.next),
                                 onClick = {
                                     if (pagerState.currentPage == state.onboardItems.size - 1) {
-                                        navController.navigate(ScreensRouts.SignInScreen.route)
+                                        navController.navigate(ScreensRouts.SignUpScreen.route)
                                     } else {
                                         coroutineScope.launch {
                                             pagerState.animateScrollToPage(pagerState.currentPage + 1)

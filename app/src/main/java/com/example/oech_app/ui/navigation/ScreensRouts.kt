@@ -2,7 +2,10 @@ package com.example.oech_app.ui.navigation
 
 sealed class ScreensRouts(val route: String) {
     data object OnBoarding : ScreensRouts("OnBoarding")
-    data object SignInScreen : ScreensRouts("SignInScreen")
+    data object SignUpScreen : ScreensRouts("SignUpScreen")
     data object LogInScreen : ScreensRouts("LogInScreen")
-    data object Holder : ScreensRouts("Holder")
+    data object ForgotPasswordScreen : ScreensRouts("ForgotPasswordScreen")
+    data object OptVerificationScreen : ScreensRouts("OptVerificationScreen")
+    data object NewPasswordScreen : ScreensRouts("NewPasswordScreen")
+    data object Home : ScreensRouts("Home")
 }

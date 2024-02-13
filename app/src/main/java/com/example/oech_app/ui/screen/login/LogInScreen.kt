@@ -119,7 +119,8 @@ fun LogInScreen(
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
-                        modifier = Modifier.padding(start = 10.dp),
+                        modifier = Modifier.padding(start = 10.dp)
+                            .clickable { navController.navigate(ScreensRouts.ForgotPasswordScreen.route) },
                         text = stringResource(R.string.forgot_password_question),
                         style = defaultTextStyle.bodyMedium12.copy(color = PrimaryColor)
                     )
@@ -132,7 +133,7 @@ fun LogInScreen(
                     textStyle = defaultTextStyle.textButton2,
                     buttonEnabled = state.buttonEnabled,
                     onClick = {
-                        if (state.buttonEnabled) navController.navigate(ScreensRouts.Holder.route)
+                        if (state.buttonEnabled) navController.navigate(ScreensRouts.Home.route)
                         if (state.rememberAgree) vm.savePassword(state.password)
                     }
                 )
@@ -148,7 +149,7 @@ fun LogInScreen(
                         style = defaultTextStyle.textStyle3.copy(color = DarkGrayColor)
                     )
                     Text(
-                        modifier = Modifier.clickable { },
+                        modifier = Modifier.clickable { navController.navigate(ScreensRouts.SignUpScreen.route)},
                         text = stringResource(R.string.sign_up),
                         style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
                     )

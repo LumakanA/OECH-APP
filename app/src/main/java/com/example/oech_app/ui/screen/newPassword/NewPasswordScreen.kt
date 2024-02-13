@@ -1,11 +1,8 @@
-package com.example.oech_app.ui.screen.forgotPassword
+package com.example.oech_app.ui.screen.newPassword
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,7 +23,6 @@ import com.example.oech_app.ui.components.AppButton
 import com.example.oech_app.ui.components.AppTextField
 import com.example.oech_app.ui.navigation.ScreensRouts
 import com.example.oech_app.ui.theme.DarkGrayColor
-import com.example.oech_app.ui.theme.PrimaryColor
 import com.example.oech_app.ui.theme.TextGrayColor
 import com.example.oech_app.ui.theme.defaultTextStyle
 
@@ -34,8 +30,8 @@ private val DefaultTopPadding = 24.dp
 private val DefaultTopTextPadding = 8.dp
 
 @Composable
-fun ForgotPasswordScreen(
-    vm: ForgotPasswordViewModel,
+fun NewPasswordScreen(
+    vm: NewPasswordViewModel,
     navController: NavController
 ) {
     val state = vm.state
@@ -54,68 +50,67 @@ fun ForgotPasswordScreen(
             ) {
                 Text(
                     modifier = Modifier.padding(top = 110.dp),
-                    text = stringResource(R.string.forgot_password_question),
+                    text = stringResource(R.string.new_password),
                     style = defaultTextStyle.textStyle4.copy(color = TextGrayColor)
                 )
                 Text(
                     modifier = Modifier.padding(top = DefaultTopTextPadding),
-                    text = stringResource(R.string.enter_your_email_address),
+                    text = stringResource(R.string.enter_new_password),
                     style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
                 )
                 Text(
-                    modifier = Modifier.padding(top = 20.dp),
-                    text = stringResource(R.string.email_address),
+                    modifier = Modifier.padding(top = 33.dp),
+                    text = stringResource(R.string.password),
                     style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
                 )
                 AppTextField(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = DefaultTopTextPadding),
-                    value = state.email,
-                    onValueChange = { newEmail ->
-                        vm.updateEmail(newEmail)
+                    value = state.password,
+                    onValueChange = { newPassword ->
+                        vm.updatePassword(newPassword)
                     },
-                    hintText = stringResource(R.string.mail_com)
+                    isPassword = true,
+                    hintText = stringResource(R.string.hint_password)
+                )
+                Text(
+                    modifier = Modifier.padding(top = 33.dp),
+                    text = stringResource(R.string.confirm_password),
+                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                )
+                AppTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = DefaultTopTextPadding),
+                    value = state.confirmPassword,
+                    onValueChange = { newConfirmPassword ->
+                        vm.updateConfirmPassword(newConfirmPassword)
+                    },
+                    isPassword = true,
+                    hintText = stringResource(R.string.hint_password)
                 )
                 AppButton(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 56.dp),
-                    text = stringResource(R.string.send_otp),
+                        .padding(top = 71.dp),
+                    text = stringResource(R.string.log_in),
                     textStyle = defaultTextStyle.textButton2,
                     buttonEnabled = state.buttonEnabled,
                     onClick = {
-                        if (state.buttonEnabled) navController.navigate(ScreensRouts.OptVerificationScreen.route)
+                        if (state.buttonEnabled) navController.navigate(ScreensRouts.LogInScreen.route)
                     }
                 )
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = 20.dp, bottom = 18.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        modifier = Modifier.padding(end = 2.dp),
-                        text = stringResource(R.string.remember_password_back_to),
-                        style = defaultTextStyle.textStyle3.copy(color = DarkGrayColor)
-                    )
-                    Text(
-                        modifier = Modifier.clickable { navController.navigate(ScreensRouts.LogInScreen.route) },
-                        text = stringResource(R.string.sign_in),
-                        style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
-                    )
-                }
             }
         }
     }
 }
 
-
 @Preview
 @Composable
-private fun ForgotPasswordScreenPreview() {
-    ForgotPasswordScreen(
-        vm = ForgotPasswordViewModel(),
+private fun LogInScreenPreview() {
+    NewPasswordScreen(
+        vm = NewPasswordViewModel(),
         navController = rememberNavController()
     )
 }
