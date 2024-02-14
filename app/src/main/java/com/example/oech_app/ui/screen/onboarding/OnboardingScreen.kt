@@ -121,7 +121,7 @@ fun OnboardingScreen(
                                 style = defaultTextStyle.textStyle3.copy(color = DarkGrayColor)
                             )
                             Text(
-                                modifier = Modifier.clickable { },
+                                modifier = Modifier.clickable { navController.navigate(ScreensRouts.LogInScreen.route)},
                                 text = stringResource(R.string.sign_in),
                                 style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
                             )

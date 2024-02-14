@@ -5,10 +5,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.example.oech_app.data.Storage
 import java.math.BigInteger
 import java.security.MessageDigest
 
-class LogInViewModel : ViewModel() {
+class LogInViewModel(private val storage: Storage) : ViewModel() {
     var state by mutableStateOf(LogInState())
         private set
 
@@ -39,7 +40,7 @@ class LogInViewModel : ViewModel() {
 
     fun savePassword(password: String) {
         val hashedPassword = hashPassword(password)
-        state = state.copy(password = hashedPassword)
+        storage.password = hashedPassword
         buttonEnabled()
         Log.d("PasswordSave", "Password saved: $hashedPassword")
     }

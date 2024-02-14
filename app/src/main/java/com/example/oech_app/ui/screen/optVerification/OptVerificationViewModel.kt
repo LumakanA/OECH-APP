@@ -9,24 +9,9 @@ class OptVerificationViewModel : ViewModel() {
     var state by mutableStateOf(OptVerificationState())
         private set
 
-    fun updateEmail(email: String) {
-        state = state.copy(
-            email = email,
-            errorEmail = !emailValidate(email)
-        )
-        buttonEnabled()
-    }
-
-    private fun emailValidate(email: String): Boolean {
-        val regex = Regex("""([a-z0-9]+)@([a-z0-9]{3,})\.([a-z]{2,3})""")
-        return regex.matches(email)
-    }
-
     private fun buttonEnabled() {
         state =
-            if (state.email.isNotEmpty() &&
-                !state.errorEmail
-            ) {
+            if (state.isCodeValid) {
                 state.copy(
                     buttonEnabled = true
                 )
@@ -39,8 +24,7 @@ class OptVerificationViewModel : ViewModel() {
 }
 
 data class OptVerificationState(
-    val email: String = "",
-    val errorEmail: Boolean = false,
     val buttonEnabled: Boolean = false,
+    val isCodeValid: Boolean = false
 )
 

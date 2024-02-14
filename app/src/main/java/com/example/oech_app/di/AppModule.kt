@@ -21,7 +21,7 @@ val appModule = module {
         SignUpViewModel()
     }
     viewModel {
-        LogInViewModel()
+        LogInViewModel(get())
     }
     viewModel {
         ForgotPasswordViewModel()

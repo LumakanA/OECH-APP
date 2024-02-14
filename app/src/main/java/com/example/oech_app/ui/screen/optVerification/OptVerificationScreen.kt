@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,7 +31,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.oech_app.R
 import com.example.oech_app.ui.components.AppButton
-import com.example.oech_app.ui.components.AppTextField
 import com.example.oech_app.ui.navigation.ScreensRouts
 import com.example.oech_app.ui.theme.DarkGrayColor
 import com.example.oech_app.ui.theme.PrimaryColor
@@ -92,10 +92,10 @@ fun OptVerificationScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 52.dp),
-                    horizontalArrangement = Arrangement.spacedBy(30.dp)
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     for (i in codeState.indices) {
-                        AppTextField(
+                        OutlinedTextField(
                             modifier = Modifier.size(32.dp),
                             value = codeState[i],
                             onValueChange = { newValue ->
@@ -103,6 +103,7 @@ fun OptVerificationScreen(
                                     codeState = codeState.toMutableList().also { it[i] = newValue }
                                 }
                             },
+                            maxLines = 1,
                         )
                     }
                 }

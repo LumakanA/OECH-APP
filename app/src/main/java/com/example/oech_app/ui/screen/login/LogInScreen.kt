@@ -37,6 +37,7 @@ import com.example.oech_app.ui.theme.PrimaryColor
 import com.example.oech_app.ui.theme.SecondaryColor
 import com.example.oech_app.ui.theme.TextGrayColor
 import com.example.oech_app.ui.theme.defaultTextStyle
+import org.koin.androidx.compose.koinViewModel
 
 private val DefaultTopPadding = 24.dp
 private val DefaultTopTextPadding = 8.dp
@@ -119,7 +120,8 @@ fun LogInScreen(
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
-                        modifier = Modifier.padding(start = 10.dp)
+                        modifier = Modifier
+                            .padding(start = 10.dp)
                             .clickable { navController.navigate(ScreensRouts.ForgotPasswordScreen.route) },
                         text = stringResource(R.string.forgot_password_question),
                         style = defaultTextStyle.bodyMedium12.copy(color = PrimaryColor)
@@ -133,7 +135,14 @@ fun LogInScreen(
                     textStyle = defaultTextStyle.textButton2,
                     buttonEnabled = state.buttonEnabled,
                     onClick = {
-                        if (state.buttonEnabled) navController.navigate(ScreensRouts.Home.route)
+                        if (state.buttonEnabled) navController.navigate(
+                            ScreensRouts.Home.route,
+                            builder = {
+                                popUpTo(ScreensRouts.Home.route) {
+                                    inclusive = true // Указываем, что нужно включить этот экран в очищенный стек
+                                }
+                            }
+                        )
                         if (state.rememberAgree) vm.savePassword(state.password)
                     }
                 )
@@ -188,7 +197,7 @@ fun GoogleAuth(
 @Composable
 private fun LogInScreenPreview() {
     LogInScreen(
-        vm = LogInViewModel(),
+        vm = koinViewModel(),
         navController = rememberNavController()
     )
 }
