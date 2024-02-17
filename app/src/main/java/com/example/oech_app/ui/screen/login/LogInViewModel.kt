@@ -5,11 +5,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.oech_app.data.Storage
+import com.example.oech_app.domain.login.LogInUseCase
+import com.example.oech_app.domain.models.User
+import kotlinx.coroutines.launch
 import java.math.BigInteger
 import java.security.MessageDigest
 
-class LogInViewModel(private val storage: Storage) : ViewModel() {
+class LogInViewModel(private val storage: Storage, private val logInUseCase: LogInUseCase) :
+    ViewModel() {
+
     var state by mutableStateOf(LogInState())
         private set
 
@@ -67,9 +73,47 @@ class LogInViewModel(private val storage: Storage) : ViewModel() {
                 )
             }
     }
+
+    fun logIn() {
+        state = state.copy(
+            isLoading = true,
+            enter = false
+        )
+        viewModelScope.launch {
+            try {
+                logInUseCase.execute(
+                    User(
+                        email = state.email,
+                        password = state.password
+                    )
+                )
+                state = state.copy(
+                    isLoading = false,
+                    enter = true
+                )
+            } catch (e: Exception) {
+                val startIndex = e.message!!.indexOf('(') + 1
+                val endIndex = e.message!!.indexOf(')')
+                state = state.copy(
+                    isLoading = false,
+                    enter = false,
+                    error = e.message!!.substring(startIndex, endIndex)
+                )
+            }
+        }
+    }
+
+    fun dismissError() {
+        state = state.copy(
+            error = null
+        )
+    }
 }
 
 data class LogInState(
+    val error: String? = null,
+    val enter: Boolean = true,
+    val isLoading: Boolean = false,
     val email: String = "",
     val errorEmail: Boolean = false,
     val password: String = "",

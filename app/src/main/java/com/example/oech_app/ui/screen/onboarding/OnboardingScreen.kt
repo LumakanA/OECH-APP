@@ -48,7 +48,7 @@ fun OnboardingScreen(
     state: OnboardingState
 ) {
 
-    vm.setOnboardItems(state.onboardItems)
+    vm.setOnboardItems(state.onboardings)
 
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState {
@@ -76,7 +76,7 @@ fun OnboardingScreen(
                             .size(400.dp)
                             .padding(top = 66.dp),
                         alignment = Alignment.TopCenter,
-                        painter = painterResource(id = state.onboardItems[page].imageResId),
+                        painter = painterResource(id = state.onboardings[page].imageResId),
                         contentDescription = ""
                     )
                     Text(
@@ -84,7 +84,7 @@ fun OnboardingScreen(
                             .fillMaxWidth()
                             .padding(top = 48.dp)
                             .align(Alignment.CenterHorizontally),
-                        text = stringResource(state.onboardItems[page].titleResId),
+                        text = stringResource(state.onboardings[page].titleResId),
                         style = defaultTextStyle.textStyle1.copy(
                             textAlign = TextAlign.Center,
                             color = PrimaryColor
@@ -94,10 +94,10 @@ fun OnboardingScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 5.dp),
-                        text = stringResource(state.onboardItems[page].descriptionResId),
+                        text = stringResource(state.onboardings[page].descriptionResId),
                         style = defaultTextStyle.textStyle2.copy(textAlign = TextAlign.Center),
                     )
-                    if (pagerState.currentPage == state.onboardItems.size - 1) {
+                    if (pagerState.currentPage == state.onboardings.size - 1) {
                         AppButton(
                             modifier = Modifier
                                 .fillMaxSize()
@@ -146,7 +146,7 @@ fun OnboardingScreen(
                             AppButton(
                                 text = stringResource(R.string.next),
                                 onClick = {
-                                    if (pagerState.currentPage == state.onboardItems.size - 1) {
+                                    if (pagerState.currentPage == state.onboardings.size - 1) {
                                         navController.navigate(ScreensRouts.SignUpScreen.route)
                                     } else {
                                         coroutineScope.launch {

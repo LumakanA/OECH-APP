@@ -12,7 +12,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -37,6 +40,7 @@ import com.example.oech_app.ui.theme.PrimaryColor
 import com.example.oech_app.ui.theme.SecondaryColor
 import com.example.oech_app.ui.theme.TextGrayColor
 import com.example.oech_app.ui.theme.defaultTextStyle
+import org.koin.androidx.compose.koinViewModel
 
 private val DefaultTopPadding = 24.dp
 private val DefaultTopTextPadding = 8.dp
@@ -47,154 +51,178 @@ fun SignUpScreen(
     navController: NavController
 ) {
     val state = vm.state
+
+    if (state.error != null) {
+        AlertDialog(
+            onDismissRequest = { vm.dismissError() },
+            title = { Text(text = state.error) },
+            text = { Text(text = state.error.toString()) },
+            confirmButton = {
+                Button(onClick = { vm.dismissError() }) {
+                    Text(text = "Ok")
+                }
+            }
+        )
+    }
     Scaffold { containerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White)
-                .padding(containerPadding)
-        ) {
-            Column(
+        if (!state.isLoading) {
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = DefaultTopPadding, end = 23.dp)
-                    .verticalScroll(rememberScrollState())
+                    .fillMaxSize()
+                    .background(Color.White)
+                    .padding(containerPadding)
             ) {
-                Text(
-                    modifier = Modifier.padding(top = 33.dp),
-                    text = stringResource(R.string.create_an_account),
-                    style = defaultTextStyle.textStyle4.copy(color = TextGrayColor)
-                )
-                Text(
-                    modifier = Modifier.padding(top = DefaultTopTextPadding),
-                    text = stringResource(R.string.complete_the_sign_up_process_to_get_started),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
-                )
-                Text(
-                    modifier = Modifier.padding(top = 33.dp),
-                    text = stringResource(R.string.full_name),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
-                )
-                AppTextField(
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = DefaultTopTextPadding),
-                    value = state.fullName,
-                    onValueChange = { newName ->
-                        vm.updateName(newName)
-                    },
-                    hintText = stringResource(R.string.ivanov_ivan)
-                )
-                Text(
-                    modifier = Modifier.padding(top = 33.dp),
-                    text = stringResource(R.string.phone_number),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
-                )
-                AppTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = DefaultTopTextPadding),
-                    value = state.phoneNumber,
-                    onValueChange = { newPhone ->
-                        vm.updatePhone(newPhone)
-                    },
-                    hintText = stringResource(R.string._7_999_999_99_99)
-                )
-                Text(
-                    modifier = Modifier.padding(top = 33.dp),
-                    text = stringResource(R.string.email_address),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
-                )
-                AppTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = DefaultTopTextPadding),
-                    value = state.email,
-                    onValueChange = { newEmail ->
-                        vm.updateEmail(newEmail)
-                    },
-                    hintText = stringResource(R.string.mail_com)
-                )
-                Text(
-                    modifier = Modifier.padding(top = 33.dp),
-                    text = stringResource(R.string.password),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
-                )
-                AppTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = DefaultTopTextPadding),
-                    value = state.password,
-                    onValueChange = { newPassword ->
-                        vm.updatePassword(newPassword)
-                    },
-                    isPassword = true,
-                    hintText = stringResource(R.string.hint_password)
-                )
-                Text(
-                    modifier = Modifier.padding(top = 33.dp),
-                    text = stringResource(R.string.confirm_password),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
-                )
-                AppTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = DefaultTopTextPadding),
-                    value = state.confirmPassword,
-                    onValueChange = { newConfirmPassword ->
-                        vm.updateConfirmPassword(newConfirmPassword)
-                    },
-                    isPassword = true,
-                    hintText = stringResource(R.string.hint_password)
-                )
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 37.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                        .padding(start = DefaultTopPadding, end = 23.dp)
+                        .verticalScroll(rememberScrollState())
                 ) {
-                    Checkbox(
-                        modifier = Modifier.size(14.dp),
-                        checked = state.policyAgree,
-                        onCheckedChange = { vm.setAgree(it) }
+                    Text(
+                        modifier = Modifier.padding(top = 33.dp),
+                        text = stringResource(R.string.create_an_account),
+                        style = defaultTextStyle.textStyle4.copy(color = TextGrayColor)
                     )
                     Text(
+                        modifier = Modifier.padding(top = DefaultTopTextPadding),
+                        text = stringResource(R.string.complete_the_sign_up_process_to_get_started),
+                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                    )
+                    Text(
+                        modifier = Modifier.padding(top = 33.dp),
+                        text = stringResource(R.string.full_name),
+                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                    )
+                    AppTextField(
                         modifier = Modifier
-                            .padding(start = 20.dp),
-                        text = stringResource(R.string.by_ticking_this_box_you_agree_to_our_terms_and_conditions_and_private_policy),
-                        style = defaultTextStyle.textStyleMini.copy(color = DarkGrayColor),
-                        textAlign = TextAlign.Center
+                            .fillMaxWidth()
+                            .padding(top = DefaultTopTextPadding),
+                        value = state.fullName,
+                        onValueChange = { newName ->
+                            vm.updateName(newName)
+                        },
+                        hintText = stringResource(R.string.ivanov_ivan)
                     )
-                }
-                AppButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 64.dp),
-                    text = stringResource(id = R.string.sign_up),
-                    textStyle = defaultTextStyle.textButton2,
-                    buttonEnabled = state.buttonEnabled,
-                    onClick = {
-                        if (state.buttonEnabled) navController.navigate(ScreensRouts.LogInScreen.route)
+                    Text(
+                        modifier = Modifier.padding(top = 33.dp),
+                        text = stringResource(R.string.phone_number),
+                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                    )
+                    AppTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = DefaultTopTextPadding),
+                        value = state.phoneNumber,
+                        onValueChange = { newPhone ->
+                            vm.updatePhone(newPhone)
+                        },
+                        hintText = stringResource(R.string._7_999_999_99_99)
+                    )
+                    Text(
+                        modifier = Modifier.padding(top = 33.dp),
+                        text = stringResource(R.string.email_address),
+                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                    )
+                    AppTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = DefaultTopTextPadding),
+                        value = state.email,
+                        onValueChange = { newEmail ->
+                            vm.updateEmail(newEmail)
+                        },
+                        hintText = stringResource(R.string.mail_com)
+                    )
+                    Text(
+                        modifier = Modifier.padding(top = 33.dp),
+                        text = stringResource(R.string.password),
+                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                    )
+                    AppTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = DefaultTopTextPadding),
+                        value = state.password,
+                        onValueChange = { newPassword ->
+                            vm.updatePassword(newPassword)
+                        },
+                        isPassword = true,
+                        hintText = stringResource(R.string.hint_password)
+                    )
+                    Text(
+                        modifier = Modifier.padding(top = 33.dp),
+                        text = stringResource(R.string.confirm_password),
+                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                    )
+                    AppTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = DefaultTopTextPadding),
+                        value = state.confirmPassword,
+                        onValueChange = { newConfirmPassword ->
+                            vm.updateConfirmPassword(newConfirmPassword)
+                        },
+                        isPassword = true,
+                        hintText = stringResource(R.string.hint_password)
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 37.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Checkbox(
+                            modifier = Modifier.size(14.dp),
+                            checked = state.policyAgree,
+                            onCheckedChange = { vm.setAgree(it) }
+                        )
+                        Text(
+                            modifier = Modifier
+                                .padding(start = 20.dp),
+                            text = stringResource(R.string.by_ticking_this_box_you_agree_to_our_terms_and_conditions_and_private_policy),
+                            style = defaultTextStyle.textStyleMini.copy(color = DarkGrayColor),
+                            textAlign = TextAlign.Center
+                        )
                     }
-                )
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = 20.dp, bottom = 18.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        modifier = Modifier.padding(end = 3.dp),
-                        text = stringResource(R.string.already_have_an_account),
-                        style = defaultTextStyle.textStyle3.copy(color = DarkGrayColor)
+                    AppButton(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 64.dp),
+                        text = stringResource(id = R.string.sign_up),
+                        textStyle = defaultTextStyle.textButton2,
+                        buttonEnabled = state.buttonEnabled,
+                        onClick = {
+                            vm.signUp()
+                            if (state.buttonEnabled && state.error == null) navController.navigate(ScreensRouts.LogInScreen.route)
+                        }
                     )
-                    Text(
-                        modifier = Modifier.clickable { navController.navigate(ScreensRouts.LogInScreen.route) },
-                        text = stringResource(R.string.sign_in),
-                        style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
-                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(top = 20.dp, bottom = 18.dp),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            modifier = Modifier.padding(end = 3.dp),
+                            text = stringResource(R.string.already_have_an_account),
+                            style = defaultTextStyle.textStyle3.copy(color = DarkGrayColor)
+                        )
+                        Text(
+                            modifier = Modifier.clickable { navController.navigate(ScreensRouts.LogInScreen.route) },
+                            text = stringResource(R.string.sign_in),
+                            style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
+                        )
+                    }
+                    GoogleAuth()
                 }
-                GoogleAuth()
+            }
+
+        } else {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                CircularProgressIndicator()
             }
         }
     }
@@ -228,7 +256,7 @@ fun GoogleAuth(
 @Composable
 private fun SignUpScreenPreview() {
     SignUpScreen(
-        vm = SignUpViewModel(),
+        vm = koinViewModel(),
         navController = rememberNavController()
     )
 }

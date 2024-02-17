@@ -100,7 +100,7 @@ fun ForgotPasswordScreen(
                         style = defaultTextStyle.textStyle3.copy(color = DarkGrayColor)
                     )
                     Text(
-                        modifier = Modifier.clickable { navController.navigate(ScreensRouts.LogInScreen.route) },
+                        modifier = Modifier.clickable { navController.navigateUp() },
                         text = stringResource(R.string.sign_in),
                         style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
                     )

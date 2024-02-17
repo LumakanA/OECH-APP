@@ -13,7 +13,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -48,122 +51,150 @@ fun LogInScreen(
     navController: NavController
 ) {
     val state = vm.state
+
+    if (state.error != null && state.error != "successful") {
+        AlertDialog(
+            onDismissRequest = { vm.dismissError() },
+            title = { Text(text = "Возникла ошибка") },
+            text = { Text(text = state.error) },
+            confirmButton = {
+                Button(onClick = { vm.dismissError() }) {
+                    Text(text = "Ok")
+                }
+            },
+        )
+    }
+
     Scaffold { containerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White)
-                .padding(containerPadding)
-        ) {
-            Column(
+        if (!state.isLoading) {
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = DefaultTopPadding, end = 23.dp)
-                    .verticalScroll(rememberScrollState())
+                    .fillMaxSize()
+                    .background(Color.White)
+                    .padding(containerPadding)
             ) {
-                Text(
-                    modifier = Modifier.padding(top = 110.dp),
-                    text = stringResource(R.string.welcome_back),
-                    style = defaultTextStyle.textStyle4.copy(color = TextGrayColor)
-                )
-                Text(
-                    modifier = Modifier.padding(top = DefaultTopTextPadding),
-                    text = stringResource(R.string.fill_in_your_email_and_password_to_continue),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
-                )
-                Text(
-                    modifier = Modifier.padding(top = 20.dp),
-                    text = stringResource(R.string.email_address),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
-                )
-                AppTextField(
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = DefaultTopTextPadding),
-                    value = state.email,
-                    onValueChange = { newEmail ->
-                        vm.updateEmail(newEmail)
-                    },
-                    hintText = stringResource(R.string.mail_com)
-                )
-                Text(
-                    modifier = Modifier.padding(top = 24.dp),
-                    text = stringResource(R.string.password),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
-                )
-                AppTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = DefaultTopTextPadding),
-                    value = state.password,
-                    onValueChange = { newPassword ->
-                        vm.updatePassword(newPassword)
-                    },
-                    isPassword = true,
-                    hintText = stringResource(R.string.hint_password)
-                )
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 17.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                        .padding(start = DefaultTopPadding, end = 23.dp)
+                        .verticalScroll(rememberScrollState())
                 ) {
-                    Checkbox(
-                        modifier = Modifier.size(14.dp),
-                        checked = state.rememberAgree,
-                        onCheckedChange = { vm.setAgree(it) }
+                    Text(
+                        modifier = Modifier.padding(top = 110.dp),
+                        text = stringResource(R.string.welcome_back),
+                        style = defaultTextStyle.textStyle4.copy(color = TextGrayColor)
                     )
                     Text(
-                        modifier = Modifier.padding(start = 10.dp),
-                        text = stringResource(R.string.remember_password),
-                        style = defaultTextStyle.bodyMedium12.copy(color = DarkGrayColor)
+                        modifier = Modifier.padding(top = DefaultTopTextPadding),
+                        text = stringResource(R.string.fill_in_your_email_and_password_to_continue),
+                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
                     )
-                    Spacer(modifier = Modifier.weight(1f))
                     Text(
+                        modifier = Modifier.padding(top = 20.dp),
+                        text = stringResource(R.string.email_address),
+                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                    )
+                    AppTextField(
                         modifier = Modifier
-                            .padding(start = 10.dp)
-                            .clickable { navController.navigate(ScreensRouts.ForgotPasswordScreen.route) },
-                        text = stringResource(R.string.forgot_password_question),
-                        style = defaultTextStyle.bodyMedium12.copy(color = PrimaryColor)
+                            .fillMaxWidth()
+                            .padding(top = DefaultTopTextPadding),
+                        value = state.email,
+                        onValueChange = { newEmail ->
+                            vm.updateEmail(newEmail)
+                        },
+                        hintText = stringResource(R.string.mail_com)
                     )
-                }
-                AppButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 187.dp),
-                    text = stringResource(R.string.sign_up),
-                    textStyle = defaultTextStyle.textButton2,
-                    buttonEnabled = state.buttonEnabled,
-                    onClick = {
-                        if (state.buttonEnabled) navController.navigate(
-                            ScreensRouts.Home.route,
-                            builder = {
-                                popUpTo(ScreensRouts.Home.route) {
-                                    inclusive = true // Указываем, что нужно включить этот экран в очищенный стек
-                                }
-                            }
+                    Text(
+                        modifier = Modifier.padding(top = 24.dp),
+                        text = stringResource(R.string.password),
+                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                    )
+                    AppTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = DefaultTopTextPadding),
+                        value = state.password,
+                        onValueChange = { newPassword ->
+                            vm.updatePassword(newPassword)
+                        },
+                        isPassword = true,
+                        hintText = stringResource(R.string.hint_password)
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 17.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Checkbox(
+                            modifier = Modifier.size(14.dp),
+                            checked = state.rememberAgree,
+                            onCheckedChange = { vm.setAgree(it) }
                         )
-                        if (state.rememberAgree) vm.savePassword(state.password)
+                        Text(
+                            modifier = Modifier.padding(start = 10.dp),
+                            text = stringResource(R.string.remember_password),
+                            style = defaultTextStyle.bodyMedium12.copy(color = DarkGrayColor)
+                        )
+                        Spacer(modifier = Modifier.weight(1f))
+                        Text(
+                            modifier = Modifier
+                                .padding(start = 10.dp)
+                                .clickable { navController.navigate(ScreensRouts.ForgotPasswordScreen.route) },
+                            text = stringResource(R.string.forgot_password_question),
+                            style = defaultTextStyle.bodyMedium12.copy(color = PrimaryColor)
+                        )
                     }
-                )
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = 20.dp, bottom = 18.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        modifier = Modifier.padding(end = 1.dp),
-                        text = stringResource(R.string.already_have_an_account),
-                        style = defaultTextStyle.textStyle3.copy(color = DarkGrayColor)
-                    )
-                    Text(
-                        modifier = Modifier.clickable { navController.navigate(ScreensRouts.SignUpScreen.route)},
+                    AppButton(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 187.dp),
                         text = stringResource(R.string.sign_up),
-                        style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
+                        textStyle = defaultTextStyle.textButton2,
+                        buttonEnabled = state.buttonEnabled,
+                        onClick = {
+                            if (state.enter) {
+                                vm.logIn()
+                            }
+                            if (state.buttonEnabled) {
+                                navController.navigate(
+                                    ScreensRouts.Home.route,
+                                    builder = {
+                                        popUpTo(ScreensRouts.SignUpScreen.route) {
+                                            inclusive = true
+                                        }
+                                    }
+                                )
+                            }
+                            if (state.rememberAgree) vm.savePassword(state.password)
+                        }
                     )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(top = 20.dp, bottom = 18.dp),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            modifier = Modifier.padding(end = 1.dp),
+                            text = stringResource(R.string.already_have_an_account),
+                            style = defaultTextStyle.textStyle3.copy(color = DarkGrayColor)
+                        )
+                        Text(
+                            modifier = Modifier.clickable { navController.navigateUp() },
+                            text = stringResource(R.string.sign_up),
+                            style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
+                        )
+                    }
+                    GoogleAuth()
                 }
-                GoogleAuth()
+            }
+        } else {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                CircularProgressIndicator()
             }
         }
     }

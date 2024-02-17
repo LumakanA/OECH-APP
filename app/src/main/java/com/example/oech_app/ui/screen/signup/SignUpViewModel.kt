@@ -4,8 +4,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.oech_app.domain.models.User
+import com.example.oech_app.domain.registration.RegistrationUseCase
+import kotlinx.coroutines.launch
 
-class SignUpViewModel : ViewModel() {
+class SignUpViewModel(val registrationUseCase: RegistrationUseCase) : ViewModel() {
     var state by mutableStateOf(SignUpState())
         private set
 
@@ -48,6 +52,7 @@ class SignUpViewModel : ViewModel() {
     private fun passwordValidate(password: String, confirmPassword: String): Boolean {
         return password != confirmPassword
     }
+
     fun setAgree(isAgreed: Boolean) {
         state = state.copy(
             policyAgree = isAgreed
@@ -75,9 +80,45 @@ class SignUpViewModel : ViewModel() {
                 )
             }
     }
+
+    fun signUp() {
+        state = state.copy(
+            isLoading = true
+        )
+        viewModelScope.launch {
+            try {
+                registrationUseCase.execute(
+                    User(
+                        name = state.fullName,
+                        phoneNumber = state.phoneNumber,
+                        email = state.email,
+                        password = state.password
+                    )
+                )
+                state = state.copy(
+                    isLoading = false
+                )
+            } catch (e: Exception) {
+                state = state.copy(
+                    isLoading = false,
+                    error = "Something went wrong"
+                )
+            }
+
+        }
+
+    }
+
+    fun dismissError() {
+        state = state.copy(
+            error = null
+        )
+    }
 }
 
 data class SignUpState(
+    val error: String? = null,
+    val isLoading: Boolean = false,
     val fullName: String = "",
     val phoneNumber: String = "",
     val email: String = "",

@@ -1,7 +1,7 @@
 package com.example.oech_app
 
 import com.example.oech_app.data.Storage
-import com.example.oech_app.domain.onboarding.OnboardItem
+import com.example.oech_app.domain.models.Onboarding
 import com.example.oech_app.ui.screen.onboarding.OnboardingViewModel
 import org.junit.Assert.*
 import org.junit.Before
@@ -33,18 +33,18 @@ class OnboardingScreenTest {
     // Реализация теста для проверки корректного извлечения изображения и текста из очереди в правильном порядке
     @Test
     fun testImageAndTextQueueOrder() {
-        val onboardItems: List<OnboardItem> = listOf(
-            OnboardItem(
+        val onboardings: List<Onboarding> = listOf(
+            Onboarding(
                 R.drawable.onboarding_one_img,
                 R.string.quick_delivery_at_your_doorstep,
                 R.string.enjoy_quick_pick_up_and_delivery_to_your_destination
             ),
-            OnboardItem(
+            Onboarding(
                 R.drawable.onboarding_two_img,
                 R.string.flexible_payment,
                 R.string.different_modes_of_payment_either_before_and_after_delivery_without_stress
             ),
-            OnboardItem(
+            Onboarding(
                 R.drawable.onboarding_three_img,
                 R.string.real_time_tracking,
                 R.string.track_your_packages_items_from_the_comfort_of_your_home_till_final_destination
