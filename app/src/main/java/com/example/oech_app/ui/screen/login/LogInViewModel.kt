@@ -76,8 +76,7 @@ class LogInViewModel(private val storage: Storage, private val logInUseCase: Log
 
     fun logIn() {
         state = state.copy(
-            isLoading = true,
-            enter = false
+            isLoading = true
         )
         viewModelScope.launch {
             try {
@@ -89,15 +88,12 @@ class LogInViewModel(private val storage: Storage, private val logInUseCase: Log
                 )
                 state = state.copy(
                     isLoading = false,
-                    enter = true
+                    error = "true"
                 )
             } catch (e: Exception) {
-                val startIndex = e.message!!.indexOf('(') + 1
-                val endIndex = e.message!!.indexOf(')')
                 state = state.copy(
                     isLoading = false,
-                    enter = false,
-                    error = e.message!!.substring(startIndex, endIndex)
+                    error = e.message?.substringBefore('.') ?: "An error occurred"
                 )
             }
         }
@@ -112,7 +108,6 @@ class LogInViewModel(private val storage: Storage, private val logInUseCase: Log
 
 data class LogInState(
     val error: String? = null,
-    val enter: Boolean = true,
     val isLoading: Boolean = false,
     val email: String = "",
     val errorEmail: Boolean = false,

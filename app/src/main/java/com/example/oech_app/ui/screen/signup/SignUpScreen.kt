@@ -21,6 +21,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -52,10 +53,16 @@ fun SignUpScreen(
 ) {
     val state = vm.state
 
+    LaunchedEffect(state.error) {
+        if (state.error == "true") {
+            navController.navigate(ScreensRouts.LogInScreen.route)
+        }
+    }
+
     if (state.error != null) {
         AlertDialog(
             onDismissRequest = { vm.dismissError() },
-            title = { Text(text = state.error) },
+            title = { Text(text = "An error occurred") },
             text = { Text(text = state.error.toString()) },
             confirmButton = {
                 Button(onClick = { vm.dismissError() }) {
@@ -192,8 +199,7 @@ fun SignUpScreen(
                         textStyle = defaultTextStyle.textButton2,
                         buttonEnabled = state.buttonEnabled,
                         onClick = {
-                            vm.signUp()
-                            if (state.buttonEnabled && state.error == null) navController.navigate(ScreensRouts.LogInScreen.route)
+                            if (state.buttonEnabled) vm.signUp()
                         }
                     )
                     Row(
@@ -220,7 +226,9 @@ fun SignUpScreen(
         } else {
             Box(
                 contentAlignment = Alignment.Center,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.White)
             ) {
                 CircularProgressIndicator()
             }

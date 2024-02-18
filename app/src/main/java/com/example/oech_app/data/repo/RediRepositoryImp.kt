@@ -9,10 +9,13 @@ import io.github.jan.supabase.postgrest.Postgrest
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
+private const val supabaseUrl = "https://iprezyrfnemwovxtywwc.supabase.co"
+private const val supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlwcmV6eXJmbmVtd292eHR5d3djIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDc5MzQxNDAsImV4cCI6MjAyMzUxMDE0MH0.p29L1M4cgVaSeTRnjxE5FUihkGx8pNb1ZPuqKVZXAng"
+
 class RediRepositoryImp : RediRepository {
     val supabase = createSupabaseClient(
-        supabaseUrl = "https://iprezyrfnemwovxtywwc.supabase.co",
-        supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlwcmV6eXJmbmVtd292eHR5d3djIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDc5MzQxNDAsImV4cCI6MjAyMzUxMDE0MH0.p29L1M4cgVaSeTRnjxE5FUihkGx8pNb1ZPuqKVZXAng"
+        supabaseUrl = supabaseUrl,
+        supabaseKey = supabaseKey
     ) {
         install(Auth)
         install(Postgrest)
@@ -36,7 +39,10 @@ class RediRepositoryImp : RediRepository {
         }
     }
 
-    override suspend fun signWithGoogle() {
-        TODO("Not yet implemented")
+    override suspend fun forgotPassword(user: User) {
+        supabase.auth.resetPasswordForEmail(
+            email = user.email
+        )
     }
+
 }

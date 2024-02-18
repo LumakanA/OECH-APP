@@ -7,5 +7,6 @@ interface RediRepository {
 
     suspend fun logInUser(user: User)
 
-    suspend fun signWithGoogle()
+    suspend fun forgotPassword(user: User)
+
 }

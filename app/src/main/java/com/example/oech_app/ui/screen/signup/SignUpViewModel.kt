@@ -96,12 +96,13 @@ class SignUpViewModel(val registrationUseCase: RegistrationUseCase) : ViewModel(
                     )
                 )
                 state = state.copy(
-                    isLoading = false
+                    isLoading = false,
+                    error = "true"
                 )
             } catch (e: Exception) {
                 state = state.copy(
                     isLoading = false,
-                    error = "Something went wrong"
+                    error = e.message?.substringBefore('.') ?: "An error occurred"
                 )
             }
 

@@ -22,6 +22,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -52,10 +53,23 @@ fun LogInScreen(
 ) {
     val state = vm.state
 
+    LaunchedEffect(state.error) {
+        if (state.error == "true") {
+            navController.navigate(
+                ScreensRouts.Home.route,
+                builder = {
+                    popUpTo(ScreensRouts.SignUpScreen.route) {
+                        inclusive = true
+                    }
+                }
+            )
+        }
+    }
+
     if (state.error != null && state.error != "successful") {
         AlertDialog(
             onDismissRequest = { vm.dismissError() },
-            title = { Text(text = "Возникла ошибка") },
+            title = { Text(text = "An error occurred") },
             text = { Text(text = state.error) },
             confirmButton = {
                 Button(onClick = { vm.dismissError() }) {
@@ -153,18 +167,8 @@ fun LogInScreen(
                         textStyle = defaultTextStyle.textButton2,
                         buttonEnabled = state.buttonEnabled,
                         onClick = {
-                            if (state.enter) {
-                                vm.logIn()
-                            }
                             if (state.buttonEnabled) {
-                                navController.navigate(
-                                    ScreensRouts.Home.route,
-                                    builder = {
-                                        popUpTo(ScreensRouts.SignUpScreen.route) {
-                                            inclusive = true
-                                        }
-                                    }
-                                )
+                                vm.logIn()
                             }
                             if (state.rememberAgree) vm.savePassword(state.password)
                         }
@@ -193,6 +197,7 @@ fun LogInScreen(
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier.fillMaxSize()
+                    .background(Color.White)
             ) {
                 CircularProgressIndicator()
             }

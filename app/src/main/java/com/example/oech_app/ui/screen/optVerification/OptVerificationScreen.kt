@@ -47,8 +47,7 @@ fun OptVerificationScreen(
     vm: OptVerificationViewModel,
     navController: NavController
 ) {
-    var codeState by remember { mutableStateOf(List(6) { "" }) } // Список состояний для каждого квадратика
-    val isCodeValid = codeState.all { it.isNotEmpty() } // Проверяем, все ли квадратики заполнены
+    var codeState by remember { mutableStateOf(List(6) { "" }) }
     var remainingTime by remember { mutableIntStateOf(0) }
     var isTimerRunning by remember { mutableStateOf(false) }
     fun startTimer() {
