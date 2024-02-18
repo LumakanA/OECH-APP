@@ -18,6 +18,7 @@ val appModule = module {
     single {
         Storage(get())
     }
+
     single {
         RediRepositoryImp()
     }
