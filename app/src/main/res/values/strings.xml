@@ -40,4 +40,8 @@
     <string name="enter_the_6_digit_numbers_sent_to_your_email">Enter the 6 digit numbers sent to your email</string>
     <string name="if_you_didn_t_receive_code">"If you didn’t receive code, "</string>
     <string name="set_new_password">Set New Password</string>
+    <string name="home_item">Home</string>
+    <string name="wallet_item">Wallet</string>
+    <string name="track_item">Track</string>
+    <string name="profile_item">Profile</string>
 </resources>

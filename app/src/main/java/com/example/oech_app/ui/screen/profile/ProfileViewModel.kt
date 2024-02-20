@@ -1,15 +1,9 @@
-package com.example.oech_app.ui.screen.login
+package com.example.oech_app.ui.screen.profile
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.oech_app.data.Storage
-import com.example.oech_app.domain.login.LogInUseCase
-import com.example.oech_app.domain.models.User
-import kotlinx.coroutines.launch
 import java.math.BigInteger
 import java.security.MessageDigest
 
@@ -19,9 +13,9 @@ import java.security.MessageDigest
 *Дата создания: 18.02.2024 в 19:04
 */
 
-class LogInViewModel(private val storage: Storage, private val logInUseCase: LogInUseCase) :
+class ProfileViewModel() :
     ViewModel() {
-    var state by mutableStateOf(LogInState())
+    var state by mutableStateOf(ProfileState())
         private set
 
     fun updateEmail(email: String) {
@@ -49,12 +43,12 @@ class LogInViewModel(private val storage: Storage, private val logInUseCase: Log
         buttonEnabled()
     }
 
-    fun savePassword(password: String) {
-        val hashedPassword = hashPassword(password)
-        storage.password = hashedPassword
-        buttonEnabled()
-        Log.d("PasswordSave", "Password saved: $hashedPassword")
-    }
+//    fun savePassword(password: String) {
+//        val hashedPassword = hashPassword(password)
+//        storage.password = hashedPassword
+//        buttonEnabled()
+//        Log.d("PasswordSave", "Password saved: $hashedPassword")
+//    }
 
     private fun hashPassword(password: String): String {
         val md = MessageDigest.getInstance("SHA-512")
@@ -79,30 +73,30 @@ class LogInViewModel(private val storage: Storage, private val logInUseCase: Log
             }
     }
 
-    fun logIn() {
-        state = state.copy(
-            isLoading = true
-        )
-        viewModelScope.launch {
-            try {
-                logInUseCase.execute(
-                    User(
-                        email = state.email,
-                        password = state.password
-                    )
-                )
-                state = state.copy(
-                    isLoading = false,
-                    error = "true"
-                )
-            } catch (e: Exception) {
-                state = state.copy(
-                    isLoading = false,
-                    error = e.message?.substringBefore('.') ?: "An error occurred"
-                )
-            }
-        }
-    }
+//    fun logIn() {
+//        state = state.copy(
+//            isLoading = true
+//        )
+//        viewModelScope.launch {
+//            try {
+//                logInUseCase.execute(
+//                    User(
+//                        email = state.email,
+//                        password = state.password
+//                    )
+//                )
+//                state = state.copy(
+//                    isLoading = false,
+//                    error = "true"
+//                )
+//            } catch (e: Exception) {
+//                state = state.copy(
+//                    isLoading = false,
+//                    error = e.message?.substringBefore('.') ?: "An error occurred"
+//                )
+//            }
+//        }
+//    }
 
     fun dismissError() {
         state = state.copy(
@@ -111,7 +105,7 @@ class LogInViewModel(private val storage: Storage, private val logInUseCase: Log
     }
 }
 
-data class LogInState(
+data class ProfileState(
     val error: String? = null,
     val isLoading: Boolean = false,
     val email: String = "",

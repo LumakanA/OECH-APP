@@ -5,12 +5,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.oech_app.ui.screen.forgotPassword.ForgotPasswordScreen
-import com.example.oech_app.ui.screen.home.Home
+import com.example.oech_app.ui.screen.home.HomeScreen
 import com.example.oech_app.ui.screen.login.LogInScreen
 import com.example.oech_app.ui.screen.newPassword.NewPasswordScreen
 import com.example.oech_app.ui.screen.onboarding.OnboardingScreen
 import com.example.oech_app.ui.screen.onboarding.OnboardingState
 import com.example.oech_app.ui.screen.optVerification.OptVerificationScreen
+import com.example.oech_app.ui.screen.profile.ProfileScreen
 import com.example.oech_app.ui.screen.signup.SignUpScreen
 import org.koin.androidx.compose.koinViewModel
 
@@ -64,7 +65,16 @@ fun NavGraph(
             )
         }
         composable(ScreensRouts.Home.route) {
-            Home()
+            HomeScreen(
+                vm = koinViewModel(),
+                navController = navHostController
+            )
+        }
+        composable(ScreensRouts.Profile.route) {
+            ProfileScreen(
+                vm = koinViewModel(),
+                navController = navHostController
+            )
         }
     }
 }

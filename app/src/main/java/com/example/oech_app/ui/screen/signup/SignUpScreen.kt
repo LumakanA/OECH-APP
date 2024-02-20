@@ -59,7 +59,7 @@ fun SignUpScreen(
         }
     }
 
-    if (state.error != null) {
+    if (state.error != null && state.error != "true" ) {
         AlertDialog(
             onDismissRequest = { vm.dismissError() },
             title = { Text(text = "An error occurred") },
