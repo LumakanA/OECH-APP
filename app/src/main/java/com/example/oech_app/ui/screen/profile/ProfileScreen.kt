@@ -11,6 +11,7 @@ import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -56,6 +57,15 @@ fun ProfileScreen(
                             style = defaultTextStyle.subtitleMedium16.copy(color = DarkGrayColor)
                         )
                     },
+//                    navigationIcon = {
+//                        IconButton(onClick = { navController.navigateUp() }) {
+//                            Icon(
+//                                painter = painterResource(id = R.drawable.arrow_square_right),
+//                                contentDescription = "stringResource(R.string.turn_back)",
+//                                tint = PrimaryColor,
+//                            )
+//                        }
+//                    },
                     modifier = Modifier.clickable { navController.navigateUp() }
                 )
             }
