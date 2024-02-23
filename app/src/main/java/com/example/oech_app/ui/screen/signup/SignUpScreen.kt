@@ -93,12 +93,12 @@ fun SignUpScreen(
                     Text(
                         modifier = Modifier.padding(top = DefaultTopTextPadding),
                         text = stringResource(R.string.complete_the_sign_up_process_to_get_started),
-                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                        style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                     )
                     Text(
                         modifier = Modifier.padding(top = 33.dp),
                         text = stringResource(R.string.full_name),
-                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                        style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                     )
                     AppTextField(
                         modifier = Modifier
@@ -113,7 +113,7 @@ fun SignUpScreen(
                     Text(
                         modifier = Modifier.padding(top = 33.dp),
                         text = stringResource(R.string.phone_number),
-                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                        style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                     )
                     AppTextField(
                         modifier = Modifier
@@ -128,7 +128,7 @@ fun SignUpScreen(
                     Text(
                         modifier = Modifier.padding(top = 33.dp),
                         text = stringResource(R.string.email_address),
-                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                        style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                     )
                     AppTextField(
                         modifier = Modifier
@@ -143,7 +143,7 @@ fun SignUpScreen(
                     Text(
                         modifier = Modifier.padding(top = 33.dp),
                         text = stringResource(R.string.password),
-                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                        style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                     )
                     AppTextField(
                         modifier = Modifier
@@ -159,7 +159,7 @@ fun SignUpScreen(
                     Text(
                         modifier = Modifier.padding(top = 33.dp),
                         text = stringResource(R.string.confirm_password),
-                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                        style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                     )
                     AppTextField(
                         modifier = Modifier
@@ -187,7 +187,7 @@ fun SignUpScreen(
                             modifier = Modifier
                                 .padding(start = 20.dp),
                             text = stringResource(R.string.by_ticking_this_box_you_agree_to_our_terms_and_conditions_and_private_policy),
-                            style = defaultTextStyle.textStyleMini.copy(color = DarkGrayColor),
+                            style = defaultTextStyle.bodyRegular12.copy(color = DarkGrayColor),
                             textAlign = TextAlign.Center
                         )
                     }
@@ -216,7 +216,7 @@ fun SignUpScreen(
                         Text(
                             modifier = Modifier.clickable { navController.navigate(ScreensRouts.LogInScreen.route) },
                             text = stringResource(R.string.sign_in),
-                            style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
+                            style = defaultTextStyle.bodyMedium14.copy(color = PrimaryColor),
                         )
                     }
                     GoogleAuth()

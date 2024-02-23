@@ -45,4 +45,8 @@ class RediRepositoryImp : RediRepository {
         )
     }
 
+    override suspend fun logOut() {
+        supabase.auth.signOut()
+    }
+
 }

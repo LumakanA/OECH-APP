@@ -8,5 +8,5 @@ interface RediRepository {
     suspend fun logInUser(user: User)
 
     suspend fun forgotPassword(user: User)
-
+    suspend fun logOut()
 }

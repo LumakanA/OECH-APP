@@ -4,6 +4,7 @@ import com.example.oech_app.data.Storage
 import com.example.oech_app.data.repo.RediRepository
 import com.example.oech_app.data.repo.RediRepositoryImp
 import com.example.oech_app.domain.login.LogInUseCase
+import com.example.oech_app.domain.profile.LogOutUseCase
 import com.example.oech_app.domain.registration.RegistrationUseCase
 import com.example.oech_app.ui.screen.forgotPassword.ForgotPasswordViewModel
 import com.example.oech_app.ui.screen.home.HomeViewModel
@@ -12,6 +13,7 @@ import com.example.oech_app.ui.screen.newPassword.NewPasswordViewModel
 import com.example.oech_app.ui.screen.onboarding.OnboardingViewModel
 import com.example.oech_app.ui.screen.optVerification.OptVerificationViewModel
 import com.example.oech_app.ui.screen.profile.ProfileViewModel
+import com.example.oech_app.ui.screen.sendAPackage.SendAPackageViewModel
 import com.example.oech_app.ui.screen.signup.SignUpViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -29,6 +31,9 @@ val appModule = module {
     }
     factory {
         LogInUseCase(get())
+    }
+    factory {
+        LogOutUseCase(get())
     }
     viewModel {
         OnboardingViewModel(get())
@@ -52,6 +57,9 @@ val appModule = module {
         HomeViewModel()
     }
     viewModel {
-        ProfileViewModel()
+        ProfileViewModel(get())
+    }
+    viewModel {
+        SendAPackageViewModel()
     }
 }

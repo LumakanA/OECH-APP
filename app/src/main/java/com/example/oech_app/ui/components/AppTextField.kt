@@ -48,7 +48,7 @@ fun AppTextField(
     BasicTextField(
         value = value,
         onValueChange = onValueChange,
-        textStyle = defaultTextStyle.textStyle3Bigger.copy(color = textColor),
+        textStyle = defaultTextStyle.bodyMedium14.copy(color = textColor),
         modifier = modifier
             .border(BorderStroke(1.dp, borderColor), RoundedCornerShape(4.dp)),
         singleLine = true,
@@ -60,7 +60,7 @@ fun AppTextField(
             ) {
                 BasicText(
                     text = if (value.isEmpty()) hintText else "",
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = textHintColor),
+                    style = defaultTextStyle.bodyMedium14.copy(color = textHintColor),
                 )
                 if (isPassword) {
                     Image(

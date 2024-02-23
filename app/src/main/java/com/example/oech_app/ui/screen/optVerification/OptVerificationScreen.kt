@@ -85,7 +85,7 @@ fun OptVerificationScreen(
                 Text(
                     modifier = Modifier.padding(top = DefaultTopTextPadding),
                     text = stringResource(R.string.enter_the_6_digit_numbers_sent_to_your_email),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                    style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                 )
                 Row(
                     modifier = Modifier
@@ -128,7 +128,7 @@ fun OptVerificationScreen(
                         } else {
                             "Resend"
                         },
-                        style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
+                        style = defaultTextStyle.bodyMedium14.copy(color = PrimaryColor),
                     )
                 }
                 AppButton(

@@ -60,12 +60,12 @@ fun ForgotPasswordScreen(
                 Text(
                     modifier = Modifier.padding(top = DefaultTopTextPadding),
                     text = stringResource(R.string.enter_your_email_address),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                    style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                 )
                 Text(
                     modifier = Modifier.padding(top = 20.dp),
                     text = stringResource(R.string.email_address),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                    style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                 )
                 AppTextField(
                     modifier = Modifier
@@ -102,7 +102,7 @@ fun ForgotPasswordScreen(
                     Text(
                         modifier = Modifier.clickable { navController.navigateUp() },
                         text = stringResource(R.string.sign_in),
-                        style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
+                        style = defaultTextStyle.bodyMedium14.copy(color = PrimaryColor),
                     )
                 }
             }
