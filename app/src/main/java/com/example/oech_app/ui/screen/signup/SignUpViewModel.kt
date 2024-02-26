@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.oech_app.domain.models.User
-import com.example.oech_app.domain.registration.RegistrationUseCase
+import com.example.oech_app.domain.usecases.registration.RegistrationUseCase
 import kotlinx.coroutines.launch
 
 class SignUpViewModel(val registrationUseCase: RegistrationUseCase) : ViewModel() {

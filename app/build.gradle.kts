@@ -51,21 +51,23 @@ android {
 }
 
 dependencies {
-
+    // Ktor
     implementation("io.ktor:ktor-client-android:2.3.7")
 
+    // Supabase
     implementation(platform("io.github.jan-tennert.supabase:bom:2.1.3"))
     implementation("io.github.jan-tennert.supabase:postgrest-kt")
     implementation("io.github.jan-tennert.supabase:realtime-kt")
 
+    //Koin
     implementation("io.insert-koin:koin-core:3.4.3")
     implementation("io.insert-koin:koin-android:3.4.3")
     implementation("io.insert-koin:koin-androidx-compose:3.4.6")
 
-    implementation("androidx.navigation:navigation-compose:2.7.7")
-
+    // Splash
     implementation("androidx.core:core-splashscreen:1.0.1")
 
+    implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
@@ -80,6 +82,7 @@ dependencies {
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.7")
     implementation("com.google.android.gms:play-services-base:18.3.0")
     implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("androidx.room:room-ktx:2.6.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -88,6 +91,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    // Mockito
     testImplementation("org.mockito:mockito-core:5.10.0")
     androidTestImplementation("org.mockito:mockito-android:5.10.0")
     androidTestImplementation("androidx.navigation:navigation-testing:2.7.7")

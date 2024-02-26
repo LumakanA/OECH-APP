@@ -1,4 +1,4 @@
-package com.example.oech_app.domain.registration
+package com.example.oech_app.domain.usecases.registration
 
 import com.example.oech_app.data.repo.RediRepository
 import com.example.oech_app.domain.models.User

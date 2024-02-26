@@ -5,6 +5,7 @@ import com.example.oech_app.R
 import com.example.oech_app.data.Storage
 import com.example.oech_app.domain.models.Onboarding
 
+
 class OnboardingViewModel(private val storage: Storage): ViewModel() {
     private var onboardings: List<Onboarding> = emptyList()
 

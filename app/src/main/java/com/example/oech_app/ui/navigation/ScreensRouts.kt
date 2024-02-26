@@ -8,4 +8,9 @@ sealed class ScreensRouts(val route: String) {
     data object OptVerificationScreen : ScreensRouts("OptVerificationScreen")
     data object NewPasswordScreen : ScreensRouts("NewPasswordScreen")
     data object Home : ScreensRouts("Home")
+    data object Profile : ScreensRouts("Profile")
+    data object AddPaymentMethod : ScreensRouts("AddPaymentMethod")
+    data object Notification : ScreensRouts("Notification")
+    data object SendAPackage : ScreensRouts("SendAPackage")
+    data object SendAPackageReceipt : ScreensRouts("SendAPackageReceipt")
 }

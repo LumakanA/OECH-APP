@@ -7,15 +7,20 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.oech_app.data.Storage
-import com.example.oech_app.domain.login.LogInUseCase
+import com.example.oech_app.domain.usecases.login.LogInUseCase
 import com.example.oech_app.domain.models.User
 import kotlinx.coroutines.launch
 import java.math.BigInteger
 import java.security.MessageDigest
 
+/**
+*Класс LogInViewModel необходим для взаимодействия между экраном LogIn и сервером
+*Создан Александром Николаевичем Рыжковым
+*Дата создания: 18.02.2024 в 19:04
+*/
+
 class LogInViewModel(private val storage: Storage, private val logInUseCase: LogInUseCase) :
     ViewModel() {
-
     var state by mutableStateOf(LogInState())
         private set
 

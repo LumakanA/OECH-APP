@@ -1,4 +1,4 @@
-package com.example.oech_app.domain.forgotPassword
+package com.example.oech_app.domain.usecases.forgotPassword
 
 import com.example.oech_app.data.repo.RediRepository
 import com.example.oech_app.domain.models.User

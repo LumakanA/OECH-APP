@@ -56,12 +56,12 @@ fun NewPasswordScreen(
                 Text(
                     modifier = Modifier.padding(top = DefaultTopTextPadding),
                     text = stringResource(R.string.enter_new_password),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                    style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                 )
                 Text(
                     modifier = Modifier.padding(top = 33.dp),
                     text = stringResource(R.string.password),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                    style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                 )
                 AppTextField(
                     modifier = Modifier
@@ -77,7 +77,7 @@ fun NewPasswordScreen(
                 Text(
                     modifier = Modifier.padding(top = 33.dp),
                     text = stringResource(R.string.confirm_password),
-                    style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                    style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                 )
                 AppTextField(
                     modifier = Modifier

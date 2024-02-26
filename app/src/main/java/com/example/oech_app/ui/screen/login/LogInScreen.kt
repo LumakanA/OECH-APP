@@ -66,7 +66,7 @@ fun LogInScreen(
         }
     }
 
-    if (state.error != null && state.error != "successful") {
+    if (state.error != null && state.error != "true") {
         AlertDialog(
             onDismissRequest = { vm.dismissError() },
             title = { Text(text = "An error occurred") },
@@ -101,12 +101,12 @@ fun LogInScreen(
                     Text(
                         modifier = Modifier.padding(top = DefaultTopTextPadding),
                         text = stringResource(R.string.fill_in_your_email_and_password_to_continue),
-                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                        style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                     )
                     Text(
                         modifier = Modifier.padding(top = 20.dp),
                         text = stringResource(R.string.email_address),
-                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                        style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                     )
                     AppTextField(
                         modifier = Modifier
@@ -121,7 +121,7 @@ fun LogInScreen(
                     Text(
                         modifier = Modifier.padding(top = 24.dp),
                         text = stringResource(R.string.password),
-                        style = defaultTextStyle.textStyle3Bigger.copy(color = DarkGrayColor)
+                        style = defaultTextStyle.bodyMedium14.copy(color = DarkGrayColor)
                     )
                     AppTextField(
                         modifier = Modifier
@@ -187,7 +187,7 @@ fun LogInScreen(
                         Text(
                             modifier = Modifier.clickable { navController.navigateUp() },
                             text = stringResource(R.string.sign_up),
-                            style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
+                            style = defaultTextStyle.bodyMedium14.copy(color = PrimaryColor),
                         )
                     }
                     GoogleAuth()

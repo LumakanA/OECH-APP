@@ -123,7 +123,7 @@ fun OnboardingScreen(
                             Text(
                                 modifier = Modifier.clickable { navController.navigate(ScreensRouts.LogInScreen.route)},
                                 text = stringResource(R.string.sign_in),
-                                style = defaultTextStyle.textStyle3Bigger.copy(color = PrimaryColor),
+                                style = defaultTextStyle.bodyMedium14.copy(color = PrimaryColor),
                             )
                         }
                     } else {
