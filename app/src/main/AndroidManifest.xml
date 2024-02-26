@@ -13,12 +13,12 @@
         android:name=".MainApplication"
         android:roundIcon="@drawable/icon_circle"
         android:supportsRtl="true"
-        android:theme="@style/Theme.OECHAPP.Starting"
+        android:theme="@style/Theme.OECHAPP"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.OECHAPP.Starting">
+            android:theme="@style/Theme.OECHAPP.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

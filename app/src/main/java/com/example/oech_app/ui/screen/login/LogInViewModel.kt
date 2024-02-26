@@ -7,7 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.oech_app.data.Storage
-import com.example.oech_app.domain.login.LogInUseCase
+import com.example.oech_app.domain.usecases.login.LogInUseCase
 import com.example.oech_app.domain.models.User
 import kotlinx.coroutines.launch
 import java.math.BigInteger

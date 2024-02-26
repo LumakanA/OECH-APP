@@ -40,6 +40,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.oech_app.R
 import com.example.oech_app.ui.components.SendAPackageCard
+import com.example.oech_app.ui.navigation.ScreensRouts
 import com.example.oech_app.ui.theme.DarkGrayColor
 import com.example.oech_app.ui.theme.LightGrayColor
 import com.example.oech_app.ui.theme.PrimaryColor
@@ -51,6 +52,7 @@ import com.example.oech_app.ui.theme.defaultTextStyle
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SendAPackageScreen(
+    onSendButtonClick: (SendAPackageState) -> Unit,
     vm: SendAPackageViewModel,
     navController: NavController
 ) {
@@ -164,9 +166,9 @@ fun SendAPackageScreen(
                         nameOfCard = R.string.package_details,
                         firstField = vm.state.packageDetails.packageItems,
                         firstFieldChange = { vm.changePackageItems(it) },
-                        secondField = vm.state.packageDetails.weight,
+                        secondField = vm.state.packageDetails.weight.toString(),
                         secondFieldChange = { vm.changePackageWeight(it) },
-                        thirdField = vm.state.packageDetails.worth,
+                        thirdField = vm.state.packageDetails.worth.toString(),
                         thirdFieldChange = { vm.changePackageWorth(it) },
                         isPackage = true
                     )
@@ -183,6 +185,10 @@ fun SendAPackageScreen(
                         Spacer(modifier = Modifier.height(16.dp))
                         Row(modifier = Modifier.fillMaxWidth()) {
                             ButtonPackagePrimary(
+                                onClick = {
+                                    navController.navigate("${ScreensRouts.SendAPackageReceipt.route}/data")
+                                    onSendButtonClick(vm.state)
+                                },
                                 text = stringResource(R.string.instant_delivery),
                                 textStyle = defaultTextStyle.bodyMedium14.copy(color = White),
                                 icon = R.drawable.clock
@@ -304,6 +310,7 @@ fun ButtonPackageWhite(
 private fun SendAPackagePreview1() {
     SendAPackageScreen(
         vm = SendAPackageViewModel(),
-        navController = rememberNavController()
+        navController = rememberNavController(),
+        onSendButtonClick = {}
     )
 }

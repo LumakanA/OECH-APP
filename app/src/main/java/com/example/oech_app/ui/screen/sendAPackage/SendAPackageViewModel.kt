@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.oech_app.domain.models.Details
 import com.example.oech_app.domain.models.PackageDetails
+import kotlinx.serialization.Serializable
 
 /**
  *Класс LogInViewModel необходим для взаимодействия между экраном LogIn и сервером
@@ -16,8 +17,10 @@ import com.example.oech_app.domain.models.PackageDetails
 
 class SendAPackageViewModel() :
     ViewModel() {
-    var state by mutableStateOf(ProfileState())
+    var state by mutableStateOf(SendAPackageState())
         private set
+
+
 
     fun changeDetailsAddress(address: String) {
         state = state.copy(
@@ -99,18 +102,18 @@ class SendAPackageViewModel() :
         )
     }
 
-    fun changePackageWeight(worth: String) {
+    fun changePackageWeight(weight: String) {
         state = state.copy(
             packageDetails = state.packageDetails.copy(
-                worth = worth
+                weight = weight.toFloat()
             )
         )
     }
 
-    fun changePackageWorth(weight: String) {
+    fun changePackageWorth(worth: String) {
         state = state.copy(
             packageDetails = state.packageDetails.copy(
-                weight = weight
+                worth = worth.toFloat()
             )
         )
     }
@@ -120,7 +123,9 @@ class SendAPackageViewModel() :
     }
 }
 
-data class ProfileState(
+
+@Serializable
+data class SendAPackageState(
     val details: Details = Details(),
     val destinationDetails: MutableList<Details> = mutableStateListOf(Details()),
     val packageDetails: PackageDetails = PackageDetails(),

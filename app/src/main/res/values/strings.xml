@@ -67,6 +67,7 @@
     <string name="state_country">State,Country</string>
     <string name="others">Others</string>
     <string name="package_items">package items</string>
+    <string name="big_package_items">Package items</string>
     <string name="weight_of_item">Weight of item(kg)</string>
     <string name="worth_of_item">Worth of Items</string>
     <string name="origin_details">Origin Details</string>
@@ -76,4 +77,8 @@
     <string name="select_delivery_type">Select delivery type</string>
     <string name="scheduled_delivery">Scheduled delivery</string>
     <string name="instant_delivery">Instant delivery</string>
+    <string name="tracking_number">Tracking Number</string>
+    <string name="delivery_charges">Delivery Charges</string>
+    <string name="package_total">Package total</string>
+    <string name="tax_and_service_charges">Tax and Service Charges</string>
 </resources>

@@ -12,4 +12,5 @@ sealed class ScreensRouts(val route: String) {
     data object AddPaymentMethod : ScreensRouts("AddPaymentMethod")
     data object Notification : ScreensRouts("Notification")
     data object SendAPackage : ScreensRouts("SendAPackage")
+    data object SendAPackageReceipt : ScreensRouts("SendAPackageReceipt")
 }

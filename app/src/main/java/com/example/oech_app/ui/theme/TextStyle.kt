@@ -18,7 +18,8 @@ data class AppTextStyles(
     val textButton2: TextStyle,
     val subtitleMedium16: TextStyle,
     val textStyle5: TextStyle,
-    val textStyle6: TextStyle
+    val textStyle6: TextStyle,
+    val subtitleBold16: TextStyle
 )
 
 val defaultTextStyle = AppTextStyles(
@@ -81,5 +82,10 @@ val defaultTextStyle = AppTextStyles(
         fontSize = 16.sp,
         lineHeight = 30.sp,
         fontFamily = FontFamily(Font(R.font.roboto_500))
+    ),
+    subtitleBold16 = TextStyle(
+        fontSize = 16.sp,
+        lineHeight = 16.sp,
+        fontFamily = FontFamily(Font(R.font.roboto_700))
     ),
 )

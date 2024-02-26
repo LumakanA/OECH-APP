@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.oech_app.domain.profile.LogOutUseCase
+import com.example.oech_app.domain.usecases.profile.LogOutUseCase
 import kotlinx.coroutines.launch
 
 /**
